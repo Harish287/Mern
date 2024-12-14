@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const authRouter = require("./routes/auth/auth-routes.js")
 
 
 // create a database connection -> u can also
@@ -19,7 +20,7 @@ const PORT = process.env.port || 5000;
 
 app.use(
     cors({
-        orgin: "http://localhost:5173/",
+        orgin: "http://localhost:5173",
         methods: ['GET', 'POST', 'DELETE', 'PUT'],
         allowedHeaders: [
             "Content-Type",
@@ -35,5 +36,6 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use("/api/auth", authRouter)
 
 app.listen(PORT, () => console.log(`server is running on the ${PORT}`))
