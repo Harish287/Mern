@@ -10,18 +10,18 @@ import { Link } from "react-router-dom";
 const initialState = {
   //   UserName: "",
   email: "",
-  password: ""
+  password: "",
 };
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   function onSubmit(event) {
     event.preventDefault();
 
-    dispatch(loginUser(formData)).then(data => {
+    dispatch(loginUser(formData)).then((data) => {
       console.log(data);
       if (data.payload?.success) {
         toast({
@@ -33,27 +33,30 @@ function AuthLogin() {
           variant: "destructive",
         });
       }
-    })
+    });
   }
-
 
   return (
     <div className=" mx-auto w-full max-w-md space-y-6">
-      <div className=" text-center">xxxx
+      <div className=" text-center">
+        xxxx
         <h1 className=" text-3xl font-bold tracking-tight text-foreground">
           Sign in to your account
         </h1>
-        <p> dont have an account
+        <p>
+          {" "}
+          dont have an account
           <Link
             className=" font-medium text-primary ml-2 hover:underline"
             to="/auth/register"
           >
             Register
-          </Link></p>
+          </Link>
+        </p>
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={' Sign In'}
+        buttonText={" Sign In"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}

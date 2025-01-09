@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 const initialState = {
   UserName: "",
   email: "",
-  password: ""
+  password: "",
 };
 
 function AuthRegister() {
@@ -26,40 +26,42 @@ function AuthRegister() {
       if (data?.payload?.success) {
         toast({
           title: data?.payload?.message,
-        })
+        });
         navigate("/auth/login");
-      }
-      else {
+      } else {
         toast({
           title: data?.payload?.message,
-          variant: 'destructive', 
+          variant: "destructive",
         });
       }
       // console.log(data);
-
     });
   }
 
-  console.log(formData)
+  console.log(formData);
 
   return (
     <div className=" mx-auto w-full max-w-md space-y-6">
-      <div className=" text-center">xxxx
+      <div className=" text-center">
+        xxxx
         <h1 className=" text-3xl font-bold tracking-tight text-foreground">
           {" "}
           Create new account
         </h1>
-        <p> Already Have an Account
+        <p>
+          {" "}
+          Already Have an Account
           <Link
             className=" font-medium text-primary ml-2 hover:underline"
             to="/auth/login"
           >
             Login
-          </Link></p>
+          </Link>
+        </p>
       </div>
       <CommonForm
         formControls={registerFormControls}
-        buttonText={' Sign up'}
+        buttonText={" Sign up"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}

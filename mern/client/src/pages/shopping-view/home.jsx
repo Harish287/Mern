@@ -1,10 +1,5 @@
 function ShoppingHome() {
-    return (
-        <div>
-            ShoppingHome
-        </div>
-
-    );
+  return <div>ShoppingHome</div>;
 }
 ///
 

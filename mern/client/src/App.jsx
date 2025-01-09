@@ -18,9 +18,7 @@ import UnauthPage from "./pages/unauth-page";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
-import { Skeleton } from "@/components/ui/skeleton"
-
-
+import { Skeleton } from "@/components/ui/skeleton";
 
 function App() {
   // const isAuthenticated = false;
@@ -30,22 +28,22 @@ function App() {
   // };
   // const user = null;
 
-  const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth)
+  const { user, isAuthenticated, isLoading } = useSelector(
+    (state) => state.auth,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkAuth())
-  }, [dispatch])
+    dispatch(checkAuth());
+  }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px] " />
+  if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px] " />;
 
-
-  console.log(isLoading, user)
+  console.log(isLoading, user);
 
   return (
     <div className=" flex flex-col overflow-hidden bg-white">
       {/* <h2> Header component</h2> */}
-
 
       <Routes>
         <Route
@@ -69,7 +67,6 @@ function App() {
           <Route path="register" element={<AuthRegister />} />
         </Route>
 
-
         <Route
           path="admin"
           element={
@@ -84,12 +81,14 @@ function App() {
           <Route path="features" element={<AdminFeatures />} />
         </Route>
 
-
-        <Route path="/shop" element={
-          <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-            <ShoppingLayout />
-          </CheckAuth>
-        }>
+        <Route
+          path="/shop"
+          element={
+            <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+              <ShoppingLayout />
+            </CheckAuth>
+          }
+        >
           <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing />} />
           <Route path="checkout" element={<ShoppingCheckout />} />
