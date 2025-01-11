@@ -17,7 +17,7 @@ import { logoutUser } from '@/store/auth-slice';
 
 function MenuItems() {
   return (
-    <nav className=" flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
+    <nav className=" flex flex-col mb-3 lg:mb-0 lg:items-center gap-10 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Link
           className=" text-sm font-medium"

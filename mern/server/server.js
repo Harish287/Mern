@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRouter = require("./routes/auth/auth-routes");
 const adminProductsRouter = require("./routes/admin/products-routes");
-
+const shopProductsRouter = require("./routes/shop/products-routes")
 // create a database connection -> u can also
 // create a sperate file for this and then import/use that file here
 
@@ -38,5 +38,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth",authRouter);
 app.use("/api/admin/products",adminProductsRouter);
+app.use("/api/shop/products", shopProductsRouter)
 
 app.listen(PORT, () => console.log(`server is running on the ${PORT}`))

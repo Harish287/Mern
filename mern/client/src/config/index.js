@@ -116,22 +116,22 @@ export const shoppingViewHeaderMenuItems = [
   },
   {
     id: 'dryFruits&honey',
-    label: 'Dry-Fruits-&-Honey',
+    label: 'Dry Fruits & Honey',
     path: '/shop/listing',
   },
   {
     id: 'organicCookies',
-    label: 'Organic-Cookies',
+    label: 'Organic Cookies',
     path: '/shop/listing',
   },
   {
     id: 'organicSweets&Snacks',
-    label: 'Organic-Sweets-&-Snacks',
+    label: 'Organic Sweets & Snacks',
     path: '/shop/listing',
   },
   {
     id: 'organicNoodels',
-    label: 'Organic-Noodels',
+    label: 'Organic Noodels',
     path: '/shop/listing',
   },
   {
@@ -141,10 +141,27 @@ export const shoppingViewHeaderMenuItems = [
   },
   {
     id: 'oragnicOils',
-    label: 'Oragnic-Oils',
+    label: 'Oragnic Oils',
     path: '/shop/listing',
   },
 ];
+
+export const categoryOptionsMap = {
+  'dryFruits&honey': 'DryFruits & Honey',
+  organicCookies: 'Organic Cookies',
+  'organicSweets&Snacks': 'Organic Sweets & Snacks',
+  organicNoodels: 'Organic Noodels',
+  soaps: 'Soaps',
+  oragnicOils: 'Oragnic Oils',
+};
+
+export const brandOptionsMap = {
+  Nbitez: 'Nbitez',
+
+  // Nike: 'Nike',
+  // Adidas: 'Adidas',
+  // ' H&M': 'H&M',
+};
 
 export const filterOptions = {
   category: [
@@ -156,20 +173,19 @@ export const filterOptions = {
     { id: 'oragnicOils', label: 'Oragnic-Oils' },
   ],
   brand: [
-    // { id: "nike", label: "Nike" },
-    // { id: "adidas", label: "Adidas" },
-    // { id: "puma", label: "Puma" },
-    // { id: "levi", label: "Levi's" },
-    // { id: "zara", label: "Zara" },
-    // { id: "h&m", label: "H&M" },
+    // { id: 'nike', label: 'Nike' },
+    // { id: 'adidas', label: 'Adidas' },
+    // { id: 'puma', label: 'Puma' },
+    // { id: 'levi', label: "Levi's" },
+    // { id: 'zara', label: 'Zara' },
+    // { id: 'h&m', label: 'H&M' },
     { id: 'Nbitez', label: 'Nbitez' },
   ],
 };
 
-
 export const sortOptions = [
-  { id: "price-lowtohigh", label: "Price: Low to High" },
-  { id: "price-hightolow", label: "Price: High to Low" },
-  { id: "title-atoz", label: "Title: A to Z" },
-  { id: "title-ztoa", label: "Title: Z to A" },
+  { id: 'price-lowtohigh', label: 'Price: Low to High' },
+  { id: 'price-hightolow', label: 'Price: High to Low' },
+  { id: 'title-atoz', label: 'Title: A to Z' },
+  { id: 'title-ztoa', label: 'Title: Z to A' },
 ];
