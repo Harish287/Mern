@@ -4,10 +4,14 @@ import { Button } from '../ui/button';
 
 import { Card, CardContent, CardFooter } from '../ui/card';
 
-function ShoppingProductTile({ product,handleGetProductDetails }) {
+function ShoppingProductTile({
+  product,
+  handleGetProductDetails,
+  handleAddtoCart,
+}) {
   return (
     <Card className="w-full max-w-sm mx-auto">
-      <div onClick={()=>handleGetProductDetails(product._id)}>
+      <div onClick={() => handleGetProductDetails(product._id)}>
         <div className=" relative">
           <img
             src={product?.image}
@@ -33,25 +37,30 @@ function ShoppingProductTile({ product,handleGetProductDetails }) {
           </div>
 
           <div className=" flex justify-between items-center mb-2">
-          <span
+            <span
               className={`${
-                product?.salePrice > 0 ? "line-through" : ""
+                product?.salePrice > 0 ? 'line-through' : ''
               } text-lg font-semibold text-primary`}
             >
-               ₹{product?.price}
+              ₹{product?.price}
             </span>
 
             {product?.salePrice > 0 ? (
               <span className=" text-lg font-semibold text-primary">
-               ₹{product?.salePrice}
+                ₹{product?.salePrice}
               </span>
             ) : null}
           </div>
         </CardContent>
-        <CardFooter>
-          <Button className="w-full">Add To Cart</Button>
-        </CardFooter>
       </div>
+      <CardFooter>
+        <Button
+          onClick={() => handleAddtoCart(product?._id)}
+          className="w-full"
+        >
+          Add To Cart
+        </Button>
+      </CardFooter>
     </Card>
   );
 }
