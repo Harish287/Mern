@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import BannerOne from '../../assets/banner1.png';
 import BannerTwo from '../../assets/banner2.png';
-import BannerThree from '../../assets/banner3.png';
+// import BannerThree from '../../assets/banner3.png';
 import BannerFour from '../../assets/banner4.png';
 import Logo from '../../assets/N-Bitez-logo.png';
 import {
@@ -54,7 +54,7 @@ function ShoppingHome() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const slides = [BannerOne, BannerTwo, BannerThree, BannerFour];
+  const slides = [BannerOne, BannerTwo, BannerFour];
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem('filters');
