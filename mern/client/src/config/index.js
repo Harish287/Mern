@@ -58,11 +58,7 @@ export const addProductFormElements = [
     name: 'category',
     componentType: 'select',
     options: [
-      // { id: "men", label: "Men" },
-      // { id: "women", label: "Women" },
-      // { id: "kids", label: "Kids" },
-      // { id: "accessories", label: "Accessories" },
-      // { id: "footwear", label: "Footwear" },
+  
       { id: 'dryFruits&honey', label: 'Dry-Fruits-&-Honey' },
       { id: 'organicCookies', label: 'Organic-Cookies' },
       { id: 'organicSweets&Snacks', label: 'Organic-Sweets-&-Snacks' },

@@ -31,14 +31,14 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
     });
   }
 
-  function handleDialogClose(){
-    setOpen(false)
-    dispatch(setProdcuctDetails())
+  function handleDialogClose() {
+    setOpen(false);
+    dispatch(setProdcuctDetails());
   }
 
   return (
     <Dialog open={open} onOpenChange={handleDialogClose}>
-      <DialogContent className=" grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
+      <DialogContent className=" grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw] overflow-auto">
         <div className=" relative overflow-hidden  rounded-lg">
           <img
             src={productDetails?.image}
@@ -50,12 +50,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
         </div>
         <div className="">
           <div>
-            <h1 className=" text-3xl font-extrabold">
-              {productDetails?.title}
+            <h1 className=" text-3xl font-extrabold"   dangerouslySetInnerHTML=
+              {{ __html:productDetails?.title}}>
             </h1>
-            <p className="text-muted-foreground text-2xl mb-5 mt-4">
-              {productDetails?.description}
-            </p>
+            <p
+              className="text-muted-foreground text-2xl mb-5 mt-4 overflow-auto max-h-40"
+              dangerouslySetInnerHTML={{ __html: productDetails?.description }}
+            ></p>
           </div>
           <div className=" flex items-center justify-between">
             <p

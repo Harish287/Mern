@@ -43,7 +43,7 @@ function AdminOrdersView() {
                   open={openDetailsDialog}
                   onOpenChange={setOpenDetailsDialog}
                 >
-                  <Button onClick={() => setOpenDetailsDialog}>
+                  <Button onClick={() => setOpenDetailsDialog(true)}>
                     View Details
                   </Button>
                   <AdminOrdersDetailsView/>
