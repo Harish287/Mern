@@ -4,14 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import UserCartItemsContent from '@/components/shopping-view/cart-items-content';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { createNewOrder } from '@/store/shop/order-slice';
+import { useToast } from '@/hooks/use-toast';
+// import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 function ShoppingCheckout() {
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
+  const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
+  const [isPaymentStart, setIsPaymentStart] = useState(false);
+  const dispatch = useDispatch();
+  const { toast } = useToast();
 
   console.log('currentSelectedAddress', currentSelectedAddress);
-  const dispatch = useDispatch();
 
   const totalCartAmount =
     cartItems && cartItems.items && cartItems.items.length > 0
@@ -27,8 +33,25 @@ function ShoppingCheckout() {
       : 0;
 
   function handleInitiatePaypalPayment() {
+    if (cartItems.length === 0) {
+      toast({
+        title: 'Your cart is empty. Please add items to proceed',
+        variant: 'destructive',
+      });
+
+      return;
+    }
+
+    if (currentSelectedAddress === null) {
+      toast({
+        title: 'Please Select One Address To Procced.',
+        variant: 'destructive',
+      });
+      return;
+    }
     const orderData = {
       userId: user?.id,
+      cartId: cartItems?._id,
       cartItems: cartItems.items.map((singleCartItem) => ({
         productId: singleCartItem?.productId,
         title: singleCartItem?.title,
@@ -57,10 +80,21 @@ function ShoppingCheckout() {
       paymentId: '',
       payerId: '',
     };
-    console.log(orderData, 'orderData');
+    // console.log(orderData, 'orderData');
+
+    dispatch(createNewOrder(orderData)).then((data) => {
+      console.log(data, 'aws');
+      if (data?.payload?.success) {
+        setIsPaymentStart(true);
+      } else {
+        setIsPaymentStart(false);
+      }
+    });
   }
 
-  console.log(cartItems, 'daadas');
+  if (approvalURL) {
+    window.location.href = approvalURL;
+  }
 
   return (
     <div className=" flex flex-col">
@@ -82,6 +116,8 @@ function ShoppingCheckout() {
             </div>
           </div>
           <div className="mt-4 w-full">
+            {/* <PayPalButtons style={{ layout: "horizontal" }} /> */}
+
             <Button onClick={handleInitiatePaypalPayment} className="w-full">
               Checkout with upi
             </Button>

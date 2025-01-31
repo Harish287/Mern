@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@paypal/paypal-js": "^8.2.0",
     "@paypal/paypal-server-sdk": "^0.6.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.5.1",
