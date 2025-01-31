@@ -139,45 +139,45 @@ const getAllOrdersByUser = async (req, res) => {
     if (!orders.length) {
       return res.status(404).json({
         success: false,
-        message: 'No Orders Found!',
+        message: "No orders found!",
       });
     }
 
     res.status(200).json({
       success: true,
-      message: orders,
+      data: orders,
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
-      success: 'false',
-      message: 'Some Message Occures!',
+      success: false,
+      message: "Some error occured!",
     });
   }
 };
 
 const getOrderDetails = async (req, res) => {
   try {
-    const { Id } = req.params;
+    const { id } = req.params;
 
-    const order = await Order.findById(Id);
+    const order = await Order.findById(id);
 
     if (!order) {
       return res.status(404).json({
-        success: true,
-        message: 'Orders Not Found!',
+        success: false,
+        message: "Order not found!",
       });
     }
 
     res.status(200).json({
       success: true,
-      message: order,
+      data: order,
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
-      success: 'false',
-      message: 'Some Message Occures!',
+      success: false,
+      message: "Some error occured!",
     });
   }
 };
