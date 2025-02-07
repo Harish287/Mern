@@ -36,32 +36,35 @@ export const capturePayment = createAsyncThunk(
 );
 
 export const getAllOrdersByUserId = createAsyncThunk(
-  "/order/getAllOrdersByUserId",
+  '/order/getAllOrdersByUserId',
   async (userId) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/order/list/${userId}`
+      `http://localhost:5000/api/shop/order/list/${userId}`,
     );
 
     return response.data;
-  }
+  },
 );
 
 export const getOrderDetails = createAsyncThunk(
-  "/order/getOrderDetails",
+  '/order/getOrderDetails',
   async (id) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/order/details/${id}`
+      `http://localhost:5000/api/shop/order/details/${id}`,
     );
 
     return response.data;
-  }
+  },
 );
-
 
 const shoppingOrderSlice = createSlice({
   name: 'shoppingOrderSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    resetOrderDetails: (state) => {
+      state.orderDetails = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createNewOrder.pending, (state) => {
@@ -105,5 +108,7 @@ const shoppingOrderSlice = createSlice({
       });
   },
 });
+
+export const { resetOrderDetails } = shoppingOrderSlice.actions;
 
 export default shoppingOrderSlice.reducer;
