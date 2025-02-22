@@ -111,6 +111,11 @@ export const shoppingViewHeaderMenuItems = [
     path: '/shop/home',
   },
   {
+    id: 'products',
+    label: 'Products',
+    path: '/shop/listing',
+  },
+  {
     id: 'dryFruits&honey',
     label: 'Dry Fruits & Honey',
     path: '/shop/listing',
@@ -139,6 +144,11 @@ export const shoppingViewHeaderMenuItems = [
     id: 'oragnicOils',
     label: 'Oragnic Oils',
     path: '/shop/listing',
+  },
+  {
+    id: 'search',
+    label: 'Search',
+    path: '/shop/search',
   },
 ];
 

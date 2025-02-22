@@ -1,6 +1,7 @@
 const paypal = require('../../helpers/paypal.js');
 const Order = require('../../models/Order.js');
 const Cart = require('../../models/Cart.js');
+const Product = require('../../models/Product.js').default;
 
 const createOrder = async (req, res) => {
   try {
@@ -111,6 +112,20 @@ const capturePayment = async (req, res) => {
     order.paymentId = paymentId;
     order.payerId = payerId;
 
+    for (let item of order.cartItems) {
+      let product = await Product.findById(item.productId);
+
+      if (!product) {
+        return res.status(404).json({
+          success: false,
+          message: `not enough stock for this product${product.title}`,
+        });
+      }
+      product.totalStock -= item.quantity;
+
+      await product.save();
+    }
+
     const getCartId = order.cartId;
     await Cart.findByIdAndDelete(getCartId);
 
@@ -139,7 +154,7 @@ const getAllOrdersByUser = async (req, res) => {
     if (!orders.length) {
       return res.status(404).json({
         success: false,
-        message: "No orders found!",
+        message: 'No orders found!',
       });
     }
 
@@ -151,7 +166,7 @@ const getAllOrdersByUser = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: 'Some error occured!',
     });
   }
 };
@@ -165,7 +180,7 @@ const getOrderDetails = async (req, res) => {
     if (!order) {
       return res.status(404).json({
         success: false,
-        message: "Order not found!",
+        message: 'Order not found!',
       });
     }
 
@@ -177,7 +192,7 @@ const getOrderDetails = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: 'Some error occured!',
     });
   }
 };

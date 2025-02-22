@@ -1,5 +1,17 @@
-import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from 'lucide-react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  HousePlug,
+  LogOut,
+  Menu,
+  ShoppingCart,
+  UserCog,
+  Search,
+} from 'lucide-react';
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from 'react-router-dom';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Button } from '../ui/button';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,24 +30,32 @@ import UserCartWrapper from './cart-wrapper';
 import { useEffect, useState } from 'react';
 import { fetchCartItems } from '@/store/shop/cart-slice';
 import { Label } from '../ui/label';
-import Logo from "../../assets/N-Bitez-logo.png"
-
+import Logo from '../../assets/N-Bitez-logo.png';
+import { Input } from '../ui/input';
 
 function MenuItems() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   function handleNavigate(getCurrentMenuItem) {
     sessionStorage.removeItem('filters');
     const currentFilter =
-      getCurrentMenuItem.id !== 'home'?
-       {
+      getCurrentMenuItem.id !== 'home' &&
+      getCurrentMenuItem.id !== 'products' &&
+      getCurrentMenuItem.id !== 'search'
+        ? {
             category: [getCurrentMenuItem.id],
           }
         : null;
 
     sessionStorage.setItem('filters', JSON.stringify(currentFilter));
 
-    navigate(getCurrentMenuItem.path);
+    location.pathname.includes('listing') && currentFilter !== null
+      ? setSearchParams(
+          new URLSearchParams(`?category=${getCurrentMenuItem.id}`),
+        )
+      : navigate(getCurrentMenuItem.path);
   }
 
   return (
@@ -58,6 +78,9 @@ function HeaderRightContent() {
   const { cartItems } = useSelector((state) => state.shopCart);
 
   const [openCartSheet, setOpenCartSheet] = useState(false);
+
+  // const [openSearchSheet, setOpenSearchSheet] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -73,6 +96,32 @@ function HeaderRightContent() {
 
   return (
     <div className=" flex lg:items-center lg:flex-row flex-col gap-4">
+      {/* Search */}
+      {/* <Sheet
+        open={openSearchSheet}
+        onOpenChange={() => setOpenSearchSheet(false)}
+      >
+        <Button
+          onClick={() => setOpenSearchSheet(true)}
+          variant="outline"
+          size="icon"
+        >
+          <Search className="w-6 h-6" />
+          <span className="sr-only">Search</span>
+        </Button>
+        <UserCartWrapper
+          setOpenSearchSheet={setOpenSearchSheet}
+
+          // cartItems={
+          //   cartItems && cartItems.items && cartItems.items.length > 0
+          //     ? cartItems.items
+          //     : []
+          // }
+        />
+      </Sheet> */}
+
+      {/* Search ends*/}
+
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
         <Button
           onClick={() => setOpenCartSheet(true)}
@@ -83,7 +132,7 @@ function HeaderRightContent() {
           <span className="sr-only">User Cart</span>
         </Button>
         <UserCartWrapper
-        setOpenCartSheet={setOpenCartSheet}
+          setOpenCartSheet={setOpenCartSheet}
           cartItems={
             cartItems && cartItems.items && cartItems.items.length > 0
               ? cartItems.items
@@ -126,9 +175,17 @@ function ShoppingViewHeader() {
       <div className=" flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className=" flex items-center gap-2">
           {/* <HousePlug className=" h-6 w-6" /> */}
-          <img src={Logo} className=" h-18 object-cover flex justify-center items-center w-18" />
+          <img
+            src={Logo}
+            className=" h-18 object-cover flex justify-center items-center w-18"
+          />
 
-          <span className=" font-bold relative ml-[-25px] text-[20px] " style={{fontFamily:"playfair display,serif"}}>Nbitez</span>
+          <span
+            className=" font-bold relative ml-[-25px] text-[20px] "
+            style={{ fontFamily: 'playfair display,serif' }}
+          >
+            Nbitez
+          </span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>

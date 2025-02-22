@@ -65,7 +65,13 @@ function ShoppingOrders() {
                     <TableCell>{orderItem?.orderDate.split('T')[0]}</TableCell>
                     <TableCell>
                       <Badge
-                        className={`py-1 px-3 ${orderItem?.orderStatus === 'confirmed' ? 'bg-green-400' : 'bg-black'}`}
+                        className={`py-1 px-3 ${
+                          orderItem?.orderStatus === 'confirmed'
+                            ? 'bg-green-500'
+                            : orderItem?.orderStatus === 'rejected'
+                              ? 'bg-red-500'
+                              : 'bg-black'
+                        }`}
                       >
                         {orderItem?.orderStatus}
                       </Badge>
@@ -81,10 +87,10 @@ function ShoppingOrders() {
                       >
                         <Button
                           onClick={() => handleFetchOrderDetails(orderItem._id)}
-                         >
+                        >
                           View Details
                         </Button>
-                        <ShoppingOrderDetailsView orderDetails={orderDetails}/>
+                        <ShoppingOrderDetailsView orderDetails={orderDetails} />
                       </Dialog>
                     </TableCell>
                   </TableRow>
