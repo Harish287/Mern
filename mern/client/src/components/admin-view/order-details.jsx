@@ -10,7 +10,7 @@ import {
   getOrderDetailsForAdmin,
   updateOrderStatus,
 } from '@/store/admin/order-slice';
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from '@/hooks/use-toast';
 
 const initialFormData = {
   status: '',
@@ -29,7 +29,6 @@ function AdminOrdersDetailsView({ orderDetails }) {
     dispatch(
       updateOrderStatus({ id: orderDetails?._id, orderStatus: status }),
     ).then((data) => {
-      console.log(data, '1243546576');
       if (data?.payload?.success) {
         dispatch(getOrderDetailsForAdmin(orderDetails?._id));
         dispatch(getAllOrdersForAdmin());
